@@ -3,6 +3,7 @@ import torch
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 from django.core.files.temp import NamedTemporaryFile
 
@@ -264,16 +265,16 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
             a.text(x1 + lxc, y1 - lyc, conf_tx, fontsize = 12, color = 'k',
                    bbox = dict(facecolor = rgb, edgecolor = rgb, alpha = 0.8))        
         
-    tmp_plot = NamedTemporaryFile()
-    plt.axis('off')
-    plt.savefig(tmp_plot.name, format='png', dpi=360, bbox_inches='tight')
+    # tmp_plot = NamedTemporaryFile()
+    # plt.axis('off')
+    # plt.savefig(tmp_plot.name, format='png', dpi=360, bbox_inches='tight')
     
-    try:
-        response = cloudinary.uploader.upload(tmp_plot.name,
-                                            public_id = 'result',
-                                            overwrite= True)
-    except:
-        response = {'url':''}
-    tmp_plot.close()
-    
-    return response['url']
+    # try:
+    #     response = cloudinary.uploader.upload(tmp_plot.name,
+    #                                         public_id = 'result',
+    #                                         overwrite= True)
+    # except:
+    #     response = {'url':''}
+    # tmp_plot.close()
+    canvas = FigureCanvasAgg(fig)
+    return canvas
