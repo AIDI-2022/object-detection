@@ -1,0 +1,13 @@
+Django
+Pillow
+gunicorn
+WhiteNoise
+Keras
+numpy
+matplotlib
+# https://download.pytorch.org/whl/cpu/torch-1.4.0%2Bcpu-cp38-cp38-win_amd64.whl
+torch
+opencv-python
+imageio
+gunicorn
+cloudinary
