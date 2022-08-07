@@ -12,25 +12,27 @@ import numpy as np
 from base64 import b64decode, b64encode
 from .utils import *
 from .darknet import Darknet
+import urllib
 
 @csrf_exempt
 def yolo_detect_api(request):
     data = {'success':False}
-    url = ''
+    img = ''
+    result = None
 
     if request.method == "POST":
-        if request.FILES.get("image", None) is not None:
-            image_request = request.FILES["image"]
-            raw_image = image_request.read()
+        if request.FILES.get('img') is not None:
+            inputImg = request.FILES.get('img')
+            raw_image = inputImg.read()
             image = np.asarray(bytearray(raw_image))
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-            result, url = yolo_detect(image)
+            result, img = yolo_detect(image)
     
         if result:
             data['success'] = True
 
     data['objects'] = result
-    data['url'] = url
+    data['resultImage'] = img
     return JsonResponse(data)
 
 def detect(request):
