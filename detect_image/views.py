@@ -3,7 +3,6 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.temp import NamedTemporaryFile
-
 import io
 import os
 from PIL import Image
@@ -53,6 +52,10 @@ def yolo_detect(original_image):
     iou_thresh = 0.4
 
     boxes = detect_objects(m, resized_image, iou_thresh, nms_thresh)
-    url = plot_boxes(original_image, boxes, class_names, plot_labels = True)
+    image_response = plot_boxes(original_image, boxes, class_names, plot_labels = True)
+    encoded = b64encode(image_response)
+    # print(image_response, 'img-resp----------------------')
+    # img_str = 'data:image/png;base64,{}'.format(encoded)
+    # print(img_str)
     objects = print_objects(boxes, class_names)
-    return objects, url
+    return objects, encoded.decode("utf-8") 
