@@ -105,7 +105,9 @@ body {
   height: 50px;
 }
 .uploaded_file_view {
-  max-width: 300px; 
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   margin: 40px auto; 
   text-align: center; 
   position: relative; 
@@ -133,7 +135,7 @@ body {
   transition: .2s;
 }
 .uploaded_file_view img {
-  max-width: 100%;
+  max-width: 50%;
 }
 .uploaded_file_view.show {
   opacity: 1;

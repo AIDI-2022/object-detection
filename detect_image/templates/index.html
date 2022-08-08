@@ -45,6 +45,8 @@
       btnOuter.addClass("file_uploading");
 
       var formData = new FormData();
+      var uploadedFile = URL.createObjectURL(e.target.files[0]);
+      $("#uploaded_view").append('<img src="'+uploadedFile+'" style="padding:30px;margin-left:50px;max-width:30%"/>');
       formData.append('img',e.target.files[0])
       
       $.ajax({
@@ -68,6 +70,7 @@
           var blob = new Blob([byteArray], {type: "image/jpg"});
           var resultUrl = URL.createObjectURL(blob);
           // var resultUrl = URL.createObjectURL(data.resultImage)
+          
           $("#uploaded_view").append('<img src="'+resultUrl+'" />').addClass("show");
         }
       })
