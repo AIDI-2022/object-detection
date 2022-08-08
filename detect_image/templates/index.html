@@ -56,7 +56,18 @@
         dataType: 'json',
         success: function(data) {
           btnOuter.addClass("file_uploaded");
-          var resultUrl = URL.createObjectURL(data.resultImage)
+          var byteImg = data.resultImage;
+          // console.log
+          const byteCharacters = atob(byteImg);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+          };
+          const byteArray = new Uint8Array(byteNumbers);
+          // byteImg = byteImg.replace(/["]+/g,'')
+          var blob = new Blob([byteArray], {type: "image/jpg"});
+          var resultUrl = URL.createObjectURL(blob);
+          // var resultUrl = URL.createObjectURL(data.resultImage)
           $("#uploaded_view").append('<img src="'+resultUrl+'" />').addClass("show");
         }
       })

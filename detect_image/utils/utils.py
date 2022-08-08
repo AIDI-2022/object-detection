@@ -4,9 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.backends.backend_agg import FigureCanvasAgg
-
+from django.http import HttpResponse
 from django.core.files.temp import NamedTemporaryFile
-
+import io
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -276,5 +276,8 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
     # except:
     #     response = {'url':''}
     # tmp_plot.close()
-    canvas = FigureCanvasAgg(fig)
-    return canvas
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    return buf.read() 
+    # return fig
