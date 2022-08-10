@@ -10,7 +10,13 @@
   <body>
       <main class="main_full">
         <div class="container">
+          <!-- <div class="banner">
+            <img class="img-fluid" src="../static/images/undraw_shopping_re_hdd9.svg" alt="">
+            <h1 class="banner-text">Object Detection with YOLOv3</h1>
+          </div> -->
+          
           <div class="panel">
+            <img class="img-fluid" style="width: 100%;padding:50px" src="../static/images/undraw_shopping_re_hdd9.svg" alt="">
             <div class="button_outer">
               <div class="btn_upload">
                 <input type="file" id="upload_file" name="">
@@ -72,6 +78,11 @@
           // var resultUrl = URL.createObjectURL(data.resultImage)
           
           $("#uploaded_view").append('<img src="'+resultUrl+'" />').addClass("show");
+          $('html, body').animate({ 
+            scrollTop: $(document).height()-$(window).height()}, 
+            1400, 
+            "easeOutQuint"
+          );
         }
       })
 
